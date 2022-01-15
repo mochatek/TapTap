@@ -1,0 +1,153 @@
+:root {
+  --wall-width: 25vw;
+  --ball-size: 15vw;
+  --ball-hue: 0;
+  --wall-hue: 180;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  background-color: hsla(0, 0, 0, 0.75);
+}
+
+#scorecard {
+  position: absolute;
+  left: 5vw;
+  font-weight: bold;
+  font-size: xx-large;
+  opacity: 0.4;
+  z-index: 10;
+}
+
+#bestcard {
+  position: absolute;
+  left: 5vw;
+  top: 9vh;
+  font-weight: bold;
+  font-size: medium;
+  opacity: 0.8;
+  z-index: 10;
+}
+
+#screen {
+  padding: 2rem;
+  width: 98vw;
+  height: 98vh;
+  position: relative;
+  background-color: hsl(40, 37%, 97%);
+}
+
+#overlay {
+  position: absolute;
+  top: 65vh;
+  left: 45vw;
+  z-index: 10;
+}
+
+.close {
+  display: none;
+}
+
+#play {
+  background-color: rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  position: relative;
+}
+
+#play div {
+  position: absolute;
+  top: 25%;
+  left: 40%;
+  width: 0;
+  height: 0;
+  border: 15px solid transparent;
+  border-left-color: black;
+}
+
+#play:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+#instruction {
+  margin-top: 30px;
+  font-size: large;
+  opacity: 0.8;
+}
+
+footer {
+  font-size: small;
+  font-weight: bolder;
+  opacity: 0.3;
+  position: fixed;
+  bottom: 5vh;
+  left: 2vw;
+  z-index: 10;
+}
+
+footer p {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+img {
+  position: relative;
+  width: 32px;
+  height: auto;
+  top: 0.75vh;
+}
+
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: hsla(325, 90%, 30%, 0.9);
+}
+
+#wall {
+  position: absolute;
+  top: 0;
+  height: 100%;
+  width: var(--wall-width);
+  background-color: hsla(var(--wall-hue), 45%, 75%, 0.5);
+}
+
+#ball {
+  position: absolute;
+  top: calc(45vh - var(--ball-size) / 2);
+  right: 0;
+  width: var(--ball-size);
+  height: var(--ball-size);
+  background-color: hsla(var(--ball-hue), 45%, 75%, 0.9);
+  border-radius: 50%;
+  animation: pendulum 1.25s linear 0s infinite;
+}
+
+#ball.stationary {
+  animation-play-state: paused;
+}
+
+@keyframes pendulum {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(calc((98vw - var(--ball-size)) * -1));
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
